@@ -62,7 +62,7 @@ export default {
     height: 1em;
     width: 1em;
     vertical-align: -0.15em;
-    fill: white;
+    fill: currentColor;
     font-size: 16px;
   }
 </style>
