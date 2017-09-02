@@ -19,8 +19,11 @@ import Editor from './components/Editor'
 import Preview from './components/Preview'
 import icon from './assets/icon'
 
+import store from './store/index'
+
 export default {
   name: 'app',
+  store,
   components: {Topbar, Editor, Preview},
   created () {
     document.body.insertAdjacentHTML('afterbegin', icon)
@@ -49,7 +52,7 @@ export default {
   }
   
   #editor {
-    width: 35%;
+    min-width: 35%;
     background: #444;
   }
   #preview {

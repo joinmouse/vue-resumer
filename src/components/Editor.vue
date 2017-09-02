@@ -15,7 +15,7 @@
         <div v-if="resume[item.field] instanceof Array">
           <!--数组时候的处理-->
           <div class="submit" v-for="subitem in resume[item.field]">
-            <div class="resumeField" v-for="(value,index) in subitem">
+            <div class="resumeField" v-for="(value,key) in subitem">
               <label>{{key}}</label>
               <input type="text" :value="value">
             </div>
@@ -35,45 +35,20 @@
 <script>
 export default {
   name: 'Editor',
-  data () {
-    return {
-      selected: 'profile',
-      resume: {
-        config: [
-          { field: 'profile', icon: 'id' },
-          { field: 'workHistory', icon: 'work' },
-          { field: 'education', icon: 'book' },
-          { field: 'projects', icon: 'heart' },
-          { field: 'awards', icon: 'cup' },
-          { field: 'contacts', icon: 'phone' }
-        ],
-        profile: {
-          name: '',
-          city: '',
-          title: ''
-        },
-        workHistory: [
-          {company: 'AL', content: '我的第二份工作是'},
-          {company: 'TL', content: '我的第一份工作是'}
-        ],
-        education: [
-          {school: 'AL', content: '文字'},
-          {school: 'TX', content: '文字'}
-        ],
-        projects: [
-          {name: 'project A', content: '文字'},
-          {name: 'project B', content: '文字'}
-        ],
-        awards: [
-          {name: 'awards A', content: '文字'},
-          {name: 'awards A', content: '文字'}
-        ],
-        contacts: [
-          {contact: 'phone', content: '17317588592'},
-          {contact: 'qq', content: '908380434'}
-        ]
+  computed: {
+    selected: {
+      get () {
+        return this.$store.state.selected
+      },
+      set (value) {
+        return this.$store.commit('switchTab', value)
       }
+    },
+    resume () {
+      return this.$store.state.resume
     }
+  },
+  methods: {
   }
 }
 </script>
@@ -88,7 +63,7 @@ export default {
       list-style: none;
     }
     > nav {
-      width: 80px;
+      min-width: 80px;
       color: white;
       background: black;
       > ol li{
